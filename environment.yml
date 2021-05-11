@@ -37,7 +37,6 @@ dependencies:
   - hdf5=1.10.6
   - icu=67.1
   - idna=2.10
-  - intel-openmp=2020.3
   - jpeg=9d
   - kealib=1.4.14
   - krb5=1.17.2
@@ -97,11 +96,7 @@ dependencies:
   - tiledb=2.1.3
   - tk=8.6.10
   - urllib3=1.26.2
-  - vc=14.2
-  - vs2015_runtime=14.28.29325
   - wheel=0.36.2
-  - win_inet_pton=1.1.0
-  - wincertstore=0.2
   - xarray=0.16.2
   - xerces-c=3.2.3
   - xz=5.2.5
