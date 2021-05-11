@@ -11,3 +11,4 @@ cartopy==0.18.0
 scikit-image==0.17.2
 pyepsg==0.4.0
 nbgitpuller==0.9.0
+jupyterlab-geojson==3.1.2
