@@ -103,3 +103,6 @@ dependencies:
   - zarr=2.6.1
   - zlib=1.2.11
   - zstd=1.4.5
+  - pip
+  - pip:
+    - -r requirements.txt
