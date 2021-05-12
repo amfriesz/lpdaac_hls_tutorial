@@ -15,16 +15,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-      with:
-        registries: 783616723547
-
-    - name: Try get contents of docker config forreal
+    - name: Setup ecr-login
       run: |
-        find ~/.docker
-        cat ~/.docker/config.json | base64
+        sudo apt update > /dev/null
+        sudo apt install amazon-ecr-credential-helper ---yes > /dev/null
+        echo '{ "credsStore": "ecr-login" } ' > ~/.docker/config.json
 
     - name: update jupyter dependencies with repo2docker
       uses: yuvipanda/repo2docker-action@allow-cred-helpers
