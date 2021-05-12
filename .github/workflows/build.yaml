@@ -26,9 +26,12 @@ jobs:
         apt update > /dev/null && apt install python3 python3-pip
         pip install jupyter-repo2docker
         TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
-        IMAGE="783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image"
+        IMAGE_NAME="783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image"
+        IMAGE="${IMAGE_NAME}:${TAG}"
         jupyter-repo2docker \
-          --image-name ${IMAGE}:${TAG} \
+          --image-name ${IMAGE} \
           --user-id 1000 --user-name jovyan \
           --no-run --push \
           .
+        docker tag ${IMAGE} "${IMAGE_NAME}:latest"
+        docker push ${IMAGE_NAME}:latest
