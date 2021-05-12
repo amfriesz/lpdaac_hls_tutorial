@@ -1,5 +1,10 @@
 name: Build Notebook Container
-on: [push]
+on:
+  push:
+    paths:
+    - requirements.txt
+    - environment.yml
+    - .github/*
 jobs:
   build:
     runs-on: ubuntu-latest
