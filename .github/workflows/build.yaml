@@ -21,6 +21,11 @@ jobs:
       with:
         registries: 783616723547
 
+    - name: What is config/
+      run: |
+        find ~/.docker
+        cat ~/.docker/config.json
+
     - name: update jupyter dependencies with repo2docker
       uses: yuvipanda/repo2docker-action@allow-cred-helpers
       with:
