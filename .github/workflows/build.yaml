@@ -31,4 +31,5 @@ jobs:
       with:
         DOCKER_USERNAME: ""
         DOCKER_PASSWORD: ""
-        IMAGE_NAME: 783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image
+        DOCKER_REGISTRY: 783616723547.dkr.ecr.us-west-2.amazonaws.com
+        IMAGE_NAME: user-image
