@@ -27,8 +27,8 @@ jobs:
         pip install jupyter-repo2docker
         TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
         IMAGE="783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image"
-        find ~/.docker
         jupyter-repo2docker \
           --image-name ${IMAGE}:${TAG} \
           --user-id 1000 --user-name jovyan \
-          --push .
+          --no-run --push \
+          .
