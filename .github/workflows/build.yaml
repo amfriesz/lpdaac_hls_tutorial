@@ -19,7 +19,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
       with:
-        registries: 783616723547.dkr.ecr.us-west-2.amazonaws.com
+        registries: 783616723547
 
     - name: update jupyter dependencies with repo2docker
       uses: yuvipanda/repo2docker-action@allow-cred-helpers
