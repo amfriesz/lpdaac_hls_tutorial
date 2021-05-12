@@ -21,10 +21,10 @@ jobs:
       with:
         registries: 783616723547
 
-    - name: Absolutely ridiculous hack lol
+    - name: Try get contents of docker config forreal
       run: |
-        sed -i.bak "s/***.dkr.ecr./783616723547.dkr.ecr./" ~/.docker/config.json
-        cat ~/.docker/config.json
+        find ~/.docker
+        cat ~/.docker/config.json | base64
 
     - name: update jupyter dependencies with repo2docker
       uses: yuvipanda/repo2docker-action@allow-cred-helpers
