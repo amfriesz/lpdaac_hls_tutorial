@@ -20,7 +20,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: update jupyter dependencies with repo2docker
-      uses: jupyterhub/repo2docker-action@master
+      uses: yuvipanda/repo2docker-action@allow-cred-helpers
       with:
         DOCKER_USERNAME: ""
         DOCKER_PASSWORD: ""
