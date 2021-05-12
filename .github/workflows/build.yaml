@@ -4,7 +4,7 @@ on:
     paths:
     - requirements.txt
     - environment.yml
-    - .github/*
+    - .github/workflows/*
 jobs:
   build:
     runs-on: ubuntu-latest
