@@ -1,0 +1,42 @@
+name: Build Notebook Container
+on:
+  push:
+    paths:
+    - requirements.txt
+    - environment.yml
+    - .github/workflows/*
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: checkout files in repo
+      uses: actions/checkout@main
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registries: 783616723547
+
+    - name: Setup repo2docker
+      run: |
+        apt update > /dev/null && apt install python3 python3-pip
+        pip install jupyter-repo2docker
+        TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
+        IMAGE_NAME="783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image"
+        IMAGE="${IMAGE_NAME}:${TAG}"
+        jupyter-repo2docker \
+          --image-name ${IMAGE} \
+          --user-id 1000 --user-name jovyan \
+          --no-run --push \
+          .
+        docker tag ${IMAGE} "${IMAGE_NAME}:latest"
+        docker push ${IMAGE_NAME}:latest
