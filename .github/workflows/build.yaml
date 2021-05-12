@@ -8,9 +8,15 @@ jobs:
     - name: checkout files in repo
       uses: actions/checkout@main
 
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
     - name: update jupyter dependencies with repo2docker
       uses: jupyterhub/repo2docker-action@master
-      with: # make sure username & password/token matches your registry
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      with:
         IMAGE_NAME: 783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image
