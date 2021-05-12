@@ -22,4 +22,6 @@ jobs:
     - name: update jupyter dependencies with repo2docker
       uses: jupyterhub/repo2docker-action@master
       with:
+        DOCKER_USERNAME: ""
+        DOCKER_PASSWORD: ""
         IMAGE_NAME: 783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image
