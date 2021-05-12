@@ -15,16 +15,20 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    - name: Setup ecr-login
-      run: |
-        sudo apt update > /dev/null
-        sudo apt install amazon-ecr-credential-helper ---yes > /dev/null
-        echo '{ "credsStore": "ecr-login" } ' > ~/.docker/config.json
-
-    - name: update jupyter dependencies with repo2docker
-      uses: yuvipanda/repo2docker-action@allow-cred-helpers
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
       with:
-        DOCKER_USERNAME: ""
-        DOCKER_PASSWORD: ""
-        DOCKER_REGISTRY: 783616723547.dkr.ecr.us-west-2.amazonaws.com
-        IMAGE_NAME: user-image
+        registries: 783616723547
+
+    - name: Setup repo2docker
+      run: |
+        apt update > /dev/null && apt install python3 python3-pip
+        pip install jupyter-repo2docker
+        TAG=$(echo "${GITHUB_SHA}" | cut -c1-12)
+        IMAGE="783616723547.dkr.ecr.us-west-2.amazonaws.com/user-image"
+        find ~/.docker
+        jupyter-repo2docker \
+          --image-name ${IMAGE}:${TAG} \
+          --user-id 1000 --user-name jovyan \
+          --push .
