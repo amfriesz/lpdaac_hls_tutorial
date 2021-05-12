@@ -21,9 +21,9 @@ jobs:
       with:
         registries: 783616723547
 
-    - name: What is config/
+    - name: Absolutely ridiculous hack lol
       run: |
-        find ~/.docker
+        sed -i.bak "s/***.dkr.ecr./783616723547.dkr.ecr./" ~/.docker/config.json
         cat ~/.docker/config.json
 
     - name: update jupyter dependencies with repo2docker
